@@ -1,0 +1,39 @@
+{
+    "user_accounts": [
+        {
+            "user_id": "user_001",
+            "banking_provider": "BCR Bank",
+            "account_balance": 5420.75,
+            "account_type": "checking",
+            "last_updated": "2024-03-16T23:59:59"
+        },
+        {
+            "user_id": "user_002",
+            "banking_provider": "ING Bank",
+            "account_balance": 3780.50,
+            "account_type": "checking",
+            "last_updated": "2024-03-16T23:59:59"
+        },
+        {
+            "user_id": "user_003",
+            "banking_provider": "Salt Bank",
+            "account_balance": 8920.25,
+            "account_type": "checking",
+            "last_updated": "2024-03-16T23:59:59"
+        },
+        {
+            "user_id": "user_004",
+            "banking_provider": "Unicredit Bank",
+            "account_balance": 4250.00,
+            "account_type": "checking",
+            "last_updated": "2024-03-16T23:59:59"
+        },
+        {
+            "user_id": "user_005",
+            "banking_provider": "Raiffeisen Bank",
+            "account_balance": 6750.80,
+            "account_type": "checking",
+            "last_updated": "2024-03-16T23:59:59"
+        }
+    ]
+} 

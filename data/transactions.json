@@ -1,0 +1,144 @@
+{
+    "transactions": [
+        {
+            "user_id": "user_001",
+            "amount_spent": 45.99,
+            "store": "Whole Foods Market",
+            "datetime": "2024-03-15T14:30:00",
+            "category": "groceries"
+        },
+        {
+            "user_id": "user_001",
+            "amount_spent": 29.99,
+            "store": "Netflix",
+            "datetime": "2024-03-01T00:00:00",
+            "category": "subscription"
+        },
+        {
+            "user_id": "user_001",
+            "amount_spent": 89.99,
+            "store": "Amazon",
+            "datetime": "2024-03-10T09:15:00",
+            "category": "shopping"
+        },
+        {
+            "user_id": "user_002",
+            "amount_spent": 120.50,
+            "store": "Shell Gas Station",
+            "datetime": "2024-03-14T16:45:00",
+            "category": "transportation"
+        },
+        {
+            "user_id": "user_002",
+            "amount_spent": 15.99,
+            "store": "Spotify",
+            "datetime": "2024-03-05T00:00:00",
+            "category": "subscription"
+        },
+        {
+            "user_id": "user_002",
+            "amount_spent": 65.00,
+            "store": "Uber",
+            "datetime": "2024-03-12T20:30:00",
+            "category": "transportation"
+        },
+        {
+            "user_id": "user_003",
+            "amount_spent": 150.00,
+            "store": "Electricity Company",
+            "datetime": "2024-03-01T00:00:00",
+            "category": "utilities"
+        },
+        {
+            "user_id": "user_003",
+            "amount_spent": 75.00,
+            "store": "Water Company",
+            "datetime": "2024-03-01T00:00:00",
+            "category": "utilities"
+        },
+        {
+            "user_id": "user_003",
+            "amount_spent": 200.00,
+            "store": "Local Restaurant",
+            "datetime": "2024-03-08T19:00:00",
+            "category": "dining"
+        },
+        {
+            "user_id": "user_004",
+            "amount_spent": 9.99,
+            "store": "LinkedIn Premium",
+            "datetime": "2024-03-10T00:00:00",
+            "category": "subscription"
+        },
+        {
+            "user_id": "user_004",
+            "amount_spent": 45.00,
+            "store": "Movie Theater",
+            "datetime": "2024-03-13T20:00:00",
+            "category": "entertainment"
+        },
+        {
+            "user_id": "user_004",
+            "amount_spent": 35.00,
+            "store": "Gym Membership",
+            "datetime": "2024-03-01T00:00:00",
+            "category": "subscription"
+        },
+        {
+            "user_id": "user_005",
+            "amount_spent": 1200.00,
+            "store": "Rent Payment",
+            "datetime": "2024-03-01T00:00:00",
+            "category": "housing"
+        },
+        {
+            "user_id": "user_005",
+            "amount_spent": 85.00,
+            "store": "Internet Provider",
+            "datetime": "2024-03-01T00:00:00",
+            "category": "utilities"
+        },
+        {
+            "user_id": "user_005",
+            "amount_spent": 150.00,
+            "store": "Department Store",
+            "datetime": "2024-03-11T15:30:00",
+            "category": "shopping"
+        },
+        {
+            "user_id": "user_001",
+            "amount_spent": 25.00,
+            "store": "Coffee Shop",
+            "datetime": "2024-03-16T08:00:00",
+            "category": "dining"
+        },
+        {
+            "user_id": "user_002",
+            "amount_spent": 199.99,
+            "store": "Apple Store",
+            "datetime": "2024-03-09T11:00:00",
+            "category": "electronics"
+        },
+        {
+            "user_id": "user_003",
+            "amount_spent": 45.00,
+            "store": "Pharmacy",
+            "datetime": "2024-03-07T16:20:00",
+            "category": "healthcare"
+        },
+        {
+            "user_id": "user_004",
+            "amount_spent": 60.00,
+            "store": "Hair Salon",
+            "datetime": "2024-03-14T13:00:00",
+            "category": "personal_care"
+        },
+        {
+            "user_id": "user_005",
+            "amount_spent": 75.00,
+            "store": "Gas Station",
+            "datetime": "2024-03-15T17:30:00",
+            "category": "transportation"
+        }
+    ]
+} 
