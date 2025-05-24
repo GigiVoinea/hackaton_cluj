@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 248, 240, 0.95);
-  background: linear-gradient(135deg, #2c1810 0%, #4a2c1a 50%, #3d2317 100%);
+  color: rgba(240, 255, 248, 0.95);
+  background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #065f46 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +15,11 @@
 
 a {
   font-weight: 500;
-  color: #ff8c42;
+  color: #4ade80;
   text-decoration: inherit;
 }
 a:hover {
-  color: #ff7028;
+  color: #22c55e;
 }
 
 body {
@@ -33,7 +33,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-  color: #ffb366;
+  color: #86efac;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -44,37 +44,37 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background: linear-gradient(135deg, #d2691e, #ff8c42);
+  background: linear-gradient(135deg, #059669, #4ade80);
   color: white;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 8px rgba(210, 105, 30, 0.3);
+  box-shadow: 0 4px 8px rgba(5, 150, 105, 0.3);
 }
 button:hover {
-  background: linear-gradient(135deg, #ff8c42, #ffa366);
+  background: linear-gradient(135deg, #4ade80, #86efac);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(210, 105, 30, 0.4);
+  box-shadow: 0 6px 12px rgba(5, 150, 105, 0.4);
 }
 button:focus,
 button:focus-visible {
-  outline: 2px solid #ff8c42;
+  outline: 2px solid #4ade80;
   outline-offset: 2px;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #2c1810;
-    background: linear-gradient(135deg, #fff8f0 0%, #ffeedd 50%, #ffddbb 100%);
+    color: #064e3b;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
   }
   a:hover {
-    color: #d2691e;
+    color: #059669;
   }
   button {
-    background: linear-gradient(135deg, #ff8c42, #ffa366);
+    background: linear-gradient(135deg, #4ade80, #86efac);
     color: white;
   }
   h1 {
-    color: #d2691e;
-    text-shadow: 1px 1px 2px rgba(210, 105, 30, 0.2);
+    color: #059669;
+    text-shadow: 1px 1px 2px rgba(5, 150, 105, 0.2);
   }
 }
