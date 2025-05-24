@@ -1,0 +1,34 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+If the user requests a complex feature break down the goal into numbered subtasks.
+- Assign each subtask:
+  - **Complexity**: Easy, Medium, or Hard.
+  - **Dependencies**: Which other subtasks must complete first.
+- Generate and maintain a `TASKS.md` in the repo root with:
+  ```markdown
+  # Task Plan for: <Original Goal>
+
+  ## Subtasks
+  1. [ ] **Subtask 1 title**
+     - Complexity: Easy
+     - Depends on: —
+  2. [ ] **Subtask 2 title**
+     - Complexity: Medium
+     - Depends on: 1
+  …
+- Present the full plan for user approval before execution.
+- Only keep the current main task you are working on and all its subtasks in `TASKS.md`. You should remove other previous main tasks
+- Upon approval, execute subtasks in dependency order, updating TASKS.md by checking off (- [x]) completed items and appending a brief “Result:” note under each.
+- After each execution, save or commit the updated TASKS.md, then proceed to the next subtask.
+- You must ALWAYS refer to and update the `TASKS.md` file 
+
+## Behavior
+- Operate under Agent mode, using the project context and TASKS.md as authoritative sources.
+- For any subtask rated Medium/Hard, recursively subdivide until all are Easy.
+- Confirm before any irreversible file or schema changes.
+
+## File References
+- Primary Tracking: TASKS.md in the workspace root.

@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+This application uses Langgraph, Pydantic, FastApi and React for the frontend. 
+You have tools at your disposal to get documentation for these libraries.
+Always use best practices for any of these technologies, otherwise explain why you have chosen a different approach.
