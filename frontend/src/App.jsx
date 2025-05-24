@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
   const dismissAlert = (id) => setAlerts(alerts.filter(a => a.id !== id));
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-4 font-sans">
+    <div className="min-h-screen flex flex-col items-center p-4 font-sans bg-gradient-to-br from-blue-50 to-green-100">
       {/* Header */}
       <header className="w-full max-w-2xl flex justify-between items-center py-4 mb-4">
         <h1 className="text-2xl md:text-3xl font-bold text-primary flex items-center gap-2">

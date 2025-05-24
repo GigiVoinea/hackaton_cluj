@@ -4,5 +4,5 @@
 @tailwind utilities;
 
 body {
-  @apply font-sans bg-gradient-to-br from-blue-50 to-green-100 min-h-screen;
+  @apply min-h-screen;
 } 
