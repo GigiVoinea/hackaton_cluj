@@ -174,3 +174,5 @@ cython_debug/
 .pypirc
 /TASKS.md
 /.cursor
+node_modules
+.vite
