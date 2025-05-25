@@ -25,11 +25,33 @@ The MCP server exposes the following banking tools:
 6. **get_account_cards(bank_id, account_id)** - Get cards associated with an account
 7. **create_card(bank_id, account_id, card_type, name_on_card)** - Create a new card
 
-## Configuration
+## Setup
 
-### Environment Variables
+### 1. Install Dependencies
 
-For production use, set these environment variables:
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Set up Environment Variables
+
+**Required**: You must set your OpenAI API key before running the application:
+
+```bash
+# Copy the example environment file
+cp .env.example .env
+
+# Edit .env and add your OpenAI API key
+OPENAI_API_KEY=your_actual_openai_api_key_here
+```
+
+Or set it directly in your environment:
+
+```bash
+export OPENAI_API_KEY="your_actual_openai_api_key_here"
+```
+
+**Optional**: For production use, you can also override the OBP credentials:
 
 ```bash
 export OBP_USERNAME="your_username@example.com"
@@ -77,6 +99,30 @@ Available tools: ['check_available_funds', 'accounts_at_bank', 'create_card', 'g
 ```
 
 If you see the list of tools, the client-server connection is working!
+
+## Troubleshooting
+
+### "OPENAI_API_KEY environment variable is required" Error
+
+If you get this error when running `python run_both.py`, it means you haven't set up your OpenAI API key. Follow the setup instructions above:
+
+1. Create a `.env` file from the example: `cp .env.example .env`
+2. Edit the `.env` file and replace `your_openai_api_key_here` with your actual OpenAI API key
+3. Or set the environment variable directly: `export OPENAI_API_KEY="your_key"`
+
+### Import Errors
+
+Make sure you have activated your virtual environment and installed all dependencies:
+
+```bash
+# Activate virtual environment (if using one)
+source .venv/bin/activate  # On macOS/Linux
+# or
+.venv\Scripts\activate     # On Windows
+
+# Install dependencies
+pip install -r requirements.txt
+```
 
 ## API Response Format
 

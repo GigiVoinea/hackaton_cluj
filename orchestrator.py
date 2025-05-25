@@ -17,11 +17,19 @@ load_dotenv()
 
 class Orchestrator:
     def __init__(self):
+        # Check for OpenAI API key
+        openai_api_key = os.getenv("OPENAI_API_KEY")
+        if not openai_api_key:
+            raise ValueError(
+                "OPENAI_API_KEY environment variable is required. "
+                "Please set it in your environment or create a .env file with OPENAI_API_KEY=your_key_here"
+            )
+        
         # Initialize LLM
         self.llm = ChatOpenAI(
             model="gpt-4o-mini", 
             temperature=0,
-            openai_api_key=SecretStr(os.getenv("OPENAI_API_KEY"))
+            openai_api_key=SecretStr(openai_api_key)
         )
         # Initialize tools as None - will be loaded lazily
         self.tools = None
