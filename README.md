@@ -1,129 +1,142 @@
-# hackaton_cluj
-Hackaton Cluj. Gigi, Adi si Mihai
+# Finn - Financial Assistant
 
-## Overview
-
-This project integrates with the Open Bank Project (OBP) API to provide real banking operations through an MCP (Model Context Protocol) server. The system provides tools for account management, balance checking, transaction history, and card operations.
+A comprehensive financial assistant application built with LangGraph, FastAPI, and React.
 
 ## Features
 
-- **Real Banking API Integration**: Connected to OBP sandbox environment
-- **MCP Server**: Exposes banking operations as tools for AI agents
-- **Comprehensive Error Handling**: Robust error handling with fallback responses
-- **Authentication Management**: Automatic DirectLogin authentication with OBP
-- **Multiple Banking Operations**: Support for accounts, balances, transactions, and cards
+- **Agentic Workflow**: Powered by LangGraph for intelligent financial advice
+- **MCP Integration**: Model Context Protocol for extensible tool integration
+- **Modern UI**: React frontend with beautiful, responsive design
+- **RESTful API**: FastAPI backend with automatic documentation
+- **Unified Startup**: Single script to run the entire application stack
 
-## Available Banking Tools
+## Quick Start
 
-The MCP server exposes the following banking tools:
+### Prerequisites
 
-1. **get_banks()** - Get list of available banks
-2. **accounts_at_bank(bank_id)** - Get accounts at a specific bank
-3. **get_accounts_held_by_user(user_id, account_type_filter, account_type_filter_operation)** - Get accounts held by a specific user (useful for onboarding)
-4. **check_available_funds(bank_id, account_id)** - Check account balance and funds availability
-5. **get_account_transactions(bank_id, account_id, limit)** - Get recent transactions
-6. **get_account_cards(bank_id, account_id)** - Get cards associated with an account
-7. **create_card(bank_id, account_id, card_type, name_on_card)** - Create a new card
+- Python 3.12+
+- Node.js 18+ and npm
+- OpenAI API key
 
-## Configuration
+### Setup
 
-### Environment Variables
+1. **Clone and setup the environment:**
+   ```bash
+   git clone <repository-url>
+   cd hackathon
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
-For production use, set these environment variables:
+2. **Configure environment:**
+   ```bash
+   cp .env.example .env
+   # Edit .env and add your OPENAI_API_KEY
+   ```
 
-```bash
-export OBP_USERNAME="your_username@example.com"
-export OBP_PASSWORD="your_password"
-export OBP_CONSUMER_KEY="your_consumer_key"
-```
+3. **Start the complete application stack:**
+   ```bash
+   python run_all.py
+   ```
 
-### Default Credentials
+This single command will:
+- Install frontend dependencies (if needed)
+- Start the main MCP server
+- Start the email MCP server
+- Start the FastAPI backend
+- Start the React frontend (Vite dev server)
+- Handle graceful shutdown with Ctrl+C
 
-The system uses sandbox credentials by default:
-- Username: `katja.fi.29@example.com`
-- Password: `ca0317`
-- Consumer Key: `h1lquhpcl3jx43xbfaqqygi2hjp1bdb3qivlanku`
+### Access Points
 
-## MCP Server and Client Usage
-
-### 1. Start the MCP Server
-
-You can start the MCP server directly:
-
-```bash
-python mcp_server.py
-```
-
-Or, to run both the MCP server and FastAPI app together (with colored logs):
-
-```bash
-python run_both.py
-```
-
-### 2. Run the MCP Client
-
-In a separate terminal, run:
-
-```bash
-python mcp_client.py
-```
-
-### Expected Output
-
-The client will connect to the server and print the available tools, e.g.:
-
-```
-Available tools: ['check_available_funds', 'accounts_at_bank', 'create_card', 'get_banks', 'get_account_transactions', 'get_account_cards', 'get_accounts_held_by_user']
-```
-
-If you see the list of tools, the client-server connection is working!
-
-## API Response Format
-
-All MCP tools return structured responses with the following format:
-
-```json
-{
-  "success": true,
-  "data": {...},
-  "count": 10,
-  "error": null,
-  "status_code": null
-}
-```
-
-In case of errors:
-
-```json
-{
-  "success": false,
-  "data": [],
-  "error": "Error description",
-  "status_code": 404
-}
-```
-
-## Dependencies
-
-- `httpx>=0.27.0` - For HTTP requests to OBP API
-- `langgraph>=0.0.30` - For graph-based workflows
-- `langchain>=0.1.16` - For LLM integration
-- `fastapi>=0.110.0` - For web API
-- `pydantic>=2.0.0` - For data validation
-- `uvicorn[standard]>=0.29.0` - For ASGI server
-- `langchain-mcp-adapters>=0.0.6` - For MCP integration
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:8000
+- **API Documentation**: http://localhost:8000/docs
 
 ## Architecture
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   LangGraph     │    │   MCP Server    │    │   OBP API       │
-│   Orchestrator  │◄──►│   (FastMCP)     │◄──►│   (Sandbox)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+### Backend Components
+
+- **`main.py`**: FastAPI application with CORS support
+- **`orchestrator.py`**: LangGraph workflow orchestrator
+- **`mcp_server.py`**: Model Context Protocol server
+- **`email_mcp_server.py`**: Email inbox simulation MCP server
+- **`mcp_client.py`**: MCP client wrapper for multiple servers
+- **`email_models.py`**: Email data models and storage
+- **`state.py`**: Pydantic state models
+
+### Frontend Components
+
+- **`App.jsx`**: Main application component with routing
+- **`WorkflowForm.jsx`**: Input form for user queries
+- **`WorkflowResult.jsx`**: Display component for AI responses
+- **`api.js`**: API client service
+
+### Startup Scripts
+
+- **`run_all.py`**: Unified startup script (recommended)
+- **`run_both.py`**: Legacy script for backend only
+
+## Development
+
+### Individual Services
+
+If you need to run services individually:
+
+```bash
+# MCP Server
+python mcp_server.py
+
+# Backend API
+uvicorn main:app --reload --port 8000
+
+# Frontend
+cd frontend
+npm run dev
 ```
 
-The system consists of:
-1. **LangGraph Orchestrator**: Manages AI agent workflows
-2. **MCP Server**: Exposes banking tools using FastMCP framework
-3. **OBP API Client**: Handles authentication and API communication
-4. **Error Handling**: Comprehensive error management with fallbacks
+### API Usage
+
+The backend exposes a simple workflow endpoint:
+
+```bash
+curl -X POST "http://localhost:8000/run-workflow" \
+     -H "Content-Type: application/json" \
+     -d '{"user_message": "Help me analyze my finances"}'
+```
+
+## Features
+
+### Financial Assistant Capabilities
+
+- **Financial Impact Scan**: Analyze your financial situation
+- **Subscription Optimization**: Review and optimize recurring expenses
+- **General Financial Advice**: Ask any financial question
+
+### Email Management Capabilities
+
+- **Email Inbox Simulation**: Complete email management system
+- **Folder Organization**: Manage emails across inbox, sent, drafts, trash, spam, and archive folders
+- **Email Operations**: List, read, search, send, move, and delete emails
+- **Smart Email Assistance**: AI-powered email organization and response suggestions
+- **Sample Data Generation**: Realistic email simulation for testing and demonstration
+
+### Technical Features
+
+- **Real-time Communication**: WebSocket-like experience through polling
+- **Error Handling**: Comprehensive error handling and user feedback
+- **Responsive Design**: Works on desktop and mobile devices
+- **Process Management**: Graceful startup and shutdown of all services
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test with `python run_all.py`
+5. Submit a pull request
+
+## License
+
+MIT License - see LICENSE file for details.

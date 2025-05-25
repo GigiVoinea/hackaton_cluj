@@ -182,16 +182,17 @@ class OBPAPIClient:
                               limit: int = 50, offset: int = 0, sort_direction: str = "DESC",
                               from_date: Optional[str] = None, to_date: Optional[str] = None) -> List[Dict[str, Any]]:
         """
-        Get Firehose Transactions for Account.
+        Get Transactions for Account (Full).
         
-        Allows bulk access to an account's transactions.
-        User must have the CanUseFirehoseAtAnyBank Role.
+        Returns transactions list of the account specified by ACCOUNT_ID and moderated by the view (VIEW_ID).
+        User Authentication is Optional. The User need not be logged in.
+        Authentication is required if the view is not public.
         
         Args:
             bank_id: Bank ID
             account_id: Account ID  
             view_id: View ID (default: "owner")
-            limit: Number of transactions to return (default: 50, max: 100)
+            limit: Number of transactions to return (default: 50)
             offset: Number of transactions to skip (default: 0)
             sort_direction: Sort direction "ASC" or "DESC" (default: "DESC")
             from_date: Start date in format yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (default: one year ago)
@@ -202,15 +203,15 @@ class OBPAPIClient:
         """
         if not bank_id or not account_id:
             raise OBPError("bank_id and account_id are required")
-        if limit <= 0 or limit > 100:
-            raise OBPError("limit must be between 1 and 100")
+        if limit <= 0:
+            raise OBPError("limit must be greater than 0")
         if sort_direction not in ["ASC", "DESC"]:
             raise OBPError("sort_direction must be 'ASC' or 'DESC'")
         if offset < 0:
             raise OBPError("offset must be >= 0")
             
-        # Use firehose endpoint for bulk access
-        url = f"{self.base_url}/obp/v5.1.0/banks/{bank_id}/firehose/accounts/{account_id}/views/{view_id}/transactions"
+        # Use standard transactions endpoint
+        url = f"{self.base_url}/obp/v5.1.0/banks/{bank_id}/accounts/{account_id}/{view_id}/transactions"
         
         # Build query parameters
         params = {
@@ -232,10 +233,10 @@ class OBPAPIClient:
                 transactions = data
             else:
                 transactions = data.get('transactions', [])
-            logger.info(f"Retrieved {len(transactions)} firehose transactions for account {account_id}")
+            logger.info(f"Retrieved {len(transactions)} transactions for account {account_id}")
             return transactions
         except OBPError as e:
-            logger.error(f"Failed to get firehose transactions for account {account_id}: {e.message}")
+            logger.error(f"Failed to get transactions for account {account_id}: {e.message}")
             raise
     
     async def get_cards(self, bank_id: str, account_id: str) -> List[Dict[str, Any]]:
@@ -557,20 +558,21 @@ async def get_account_transactions(bank_id: str, account_id: str, view_id: str =
                                  limit: int = 50, offset: int = 0, sort_direction: str = "DESC",
                                  from_date: str = None, to_date: str = None) -> Dict[str, Any]:
     """
-    Get Firehose Transactions for an Account.
+    Get Transactions for Account (Full).
     
-    Allows bulk access to an account's transactions using the firehose endpoint.
-    User must have the CanUseFirehoseAtAnyBank Role.
+    Returns transactions list of the account specified by ACCOUNT_ID and moderated by the view (VIEW_ID).
+    User Authentication is Optional. The User need not be logged in.
+    Authentication is required if the view is not public.
     
     Args:
         bank_id: Bank ID
         account_id: Account ID
         view_id: View ID (default: "owner")
-        limit: Number of transactions to return (default: 50, max: 100)
+        limit: Number of transactions to return (default: 50)
         offset: Number of transactions to skip for pagination (default: 0)
         sort_direction: Sort direction "ASC" or "DESC" (default: "DESC")
-        from_date: Start date in format yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (optional)
-        to_date: End date in format yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (optional)
+        from_date: Start date in format yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (optional, default: one year ago)
+        to_date: End date in format yyyy-MM-dd'T'HH:mm:ss.SSS'Z' (optional, default: now)
     """
     try:
         await ensure_authenticated()

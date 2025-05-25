@@ -8,19 +8,32 @@ from langchain_mcp_adapters.client import MultiServerMCPClient
 import os
 
 class MCPClientWrapper:
-    def __init__(self, server_script="mcp_server.py"):
-        self.server_script = server_script
-        # Get absolute path to the server script
-        server_path = os.path.abspath(server_script)
+    def __init__(self, server_scripts=None):
+        if server_scripts is None:
+            server_scripts = ["mcp_server.py", "email_mcp_server.py"]
         
-        # MultiServerMCPClient expects a dictionary of server configurations
-        self.client = MultiServerMCPClient({
-            "local_server": {
+        self.server_scripts = server_scripts
+        
+        # Configure multiple servers
+        server_configs = {}
+        for i, script in enumerate(server_scripts):
+            server_path = os.path.abspath(script)
+            server_name = f"server_{i}" if len(server_scripts) > 1 else "local_server"
+            
+            # Use script name as server identifier for better naming
+            if "email" in script:
+                server_name = "email_server"
+            elif "mcp_server" in script:
+                server_name = "main_server"
+            
+            server_configs[server_name] = {
                 "command": "python",
                 "args": [server_path],
                 "transport": "stdio",
             }
-        })
+        
+        # MultiServerMCPClient expects a dictionary of server configurations
+        self.client = MultiServerMCPClient(server_configs)
 
     async def list_tools(self):
         # Use direct method call instead of context manager
